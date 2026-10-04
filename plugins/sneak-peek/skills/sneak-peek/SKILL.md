@@ -6,7 +6,6 @@ allowed-tools:
   - "mcp__plugin_sneak-peek_sneak-peek__*"
   - "Edit(~/Library/Application Support/Sneak Peek/projects/**)"
   - "Write(~/Library/Application Support/Sneak Peek/projects/**)"
-  - "Bash(*/node_modules/.bin/tsc -p *)"
 ---
 
 # Sneak Peek
