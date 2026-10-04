@@ -25,7 +25,7 @@ Open Claude Code in your project and ask, for example:
 - A skill, `sneak-peek`: how Claude builds prototypes quickly, gives them controls, checks
   them and hands them back.
 - An MCP server, `sneak-peek`, with the playground's actions: `working`, `show`, `done`,
-  `shot`, `open`, `selected`, `notes`, `note_done`, `controls`, `list`, `snapshot` and `canvas`.
+  `shot`, `open`, `selected`, `notes`, `note_done`, `controls`, `list` and `snapshot`.
 - A `UserPromptSubmit` hook that hands Claude the notes you pin on elements in the app, with
   your next message.
 
