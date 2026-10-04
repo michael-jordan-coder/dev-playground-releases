@@ -1,0 +1,19 @@
+{
+  "name": "sneak-peek",
+  "displayName": "Sneak Peek",
+  "description": "Prototype UI from your real repo in a live canvas: Claude writes variants that import your own components and tokens, outside the repo, and Sneak Peek shows each one on phone, tablet and desktop as it is saved. Needs the free Sneak Peek Mac app.",
+  "version": "0.8.2",
+  "author": {
+    "name": "Sneak Peek"
+  },
+  "homepage": "https://sneak-peek-bay.vercel.app",
+  "license": "MIT",
+  "keywords": [
+    "prototyping",
+    "ui",
+    "design",
+    "react",
+    "canvas",
+    "mac"
+  ]
+}

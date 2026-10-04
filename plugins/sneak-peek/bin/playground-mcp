@@ -1,0 +1,9 @@
+#!/bin/sh
+# The playground's MCP server, from the installed Sneak Peek app.
+set -eu
+. "$(dirname "$0")/find-app.sh"
+if [ -z "$playground" ]; then
+  echo "$missing" >&2
+  exit 1
+fi
+exec "$playground/skill/playground-mcp" "$@"

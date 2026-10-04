@@ -1,0 +1,14 @@
+{
+  "name": "sneak-peek",
+  "owner": {
+    "name": "Sneak Peek"
+  },
+  "plugins": [
+    {
+      "name": "sneak-peek",
+      "source": "./plugins/sneak-peek",
+      "description": "Prototype UI from your real repo in a live canvas: Claude writes variants that import your own components and tokens, outside the repo, and Sneak Peek shows each one on phone, tablet and desktop as it is saved. Needs the free Sneak Peek Mac app.",
+      "version": "0.8.2"
+    }
+  ]
+}

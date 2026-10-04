@@ -1,0 +1,7 @@
+#!/bin/sh
+# Hands Claude the notes the user pinned in Sneak Peek, with their next message. Without the
+# app there are no notes, and a hook must never block the user's prompt.
+set -eu
+. "$(dirname "$0")/find-app.sh"
+[ -n "$playground" ] || exit 0
+exec "$playground/skill/playground-hook" "$@"

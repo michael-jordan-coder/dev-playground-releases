@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "sneak-peek": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/playground-mcp"
+    }
+  }
+}
