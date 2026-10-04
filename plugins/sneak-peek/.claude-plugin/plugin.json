@@ -7,6 +7,10 @@
     "name": "Sneak Peek"
   },
   "homepage": "https://sneak-peek-bay.vercel.app",
+  "documentationUrl": "https://sneak-peek-bay.vercel.app/docs",
+  "privacyPolicyUrl": "https://sneak-peek-bay.vercel.app/privacy",
+  "supportUrl": "https://github.com/michael-jordan-coder/dev-playground-releases/issues",
+  "repository": "https://github.com/michael-jordan-coder/dev-playground-releases",
   "license": "MIT",
   "keywords": [
     "prototyping",
