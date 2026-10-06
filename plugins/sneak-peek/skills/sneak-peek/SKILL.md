@@ -72,11 +72,8 @@ open from another copy, say so in a line and wait.
 
 ## A project just added
 
-When the request brought a project in, the user has seen nothing yet. Show before asking:
-put the screen a visitor sees first (or its most self-contained part, with fixture data) up
-as `Current` on a prototype named for it (`home`, `pricing`), within a minute, no controls.
-Then in two or three lines: this is their real UI, live, and three concrete things to try,
-named from what you saw. Ask which. Never open with an open question on an empty canvas.
+When the request brought a project in, read `first-frame.md` beside this file and follow it
+instead of the steps above: one frame of their own screen, before any question.
 
 ## Writing a prototype
 

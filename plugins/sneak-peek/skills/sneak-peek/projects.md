@@ -3,7 +3,7 @@
 ## Registering a project
 
 `playground list` prints the projects folder on its first line, then what exists. To add a
-project:
+project (or the `add` tool, with the same arguments):
 
 ```sh
 playground add <name> <path-to-repo> [--css <repo-relative stylesheet>]
