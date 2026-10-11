@@ -63,7 +63,9 @@ call waits on a long context. So:
 6. **Hand back:** `playground done` and `playground show <project> <prototype> --variant
    <Name>` in one message, then in chat one line per variant (its name and the idea it
    tests), which one you would start from and why, and that they can double-click a frame
-   to tune its controls, keep one, or ask for more.
+   to tune its controls, keep one, or ask for more. When `working` printed a question to
+   ask once, it is the last line, in one sentence; on their reply, record it with
+   `playground offer` as that line says.
 
 While you work, chat only what changes on screen, a short line per take ("Stacked is up:
 the price sits above the features"). No code or commands in chat. Every mark in the app
@@ -86,7 +88,8 @@ instead of the steps above: one frame of their own screen, before any question.
   `export const layout = "fullscreen";`. Flows keep their step state inside the variant.
 - Next.js `Link`, `Image` and `next/navigation` are stubbed. Server components, actions and
   data fetching do not run: pass fixture data.
-- Helpers stay in the prototype folder. Never edit the project repo from a prototype task.
+- Helpers stay in the prototype folder. Never edit the project repo from a prototype task;
+  the one file `playground offer` writes there, on the user's yes, is its own.
 
 ## Controls
 
@@ -119,5 +122,5 @@ Read the file beside this one only when the request calls for it:
 
 - `selection-and-notes.md`: the user says "this", "the selected one", or refers to notes
   they left in the app.
-- `projects.md`: registering a project, its stylesheet, the folder layout, snapshots before
-  reworking, opening the app.
+- `projects.md`: registering a project, its stylesheet, the offer `working` may ask you to
+  put, the folder layout, snapshots before reworking, opening the app.

@@ -15,6 +15,20 @@ is wrong or missing, pass `--css`, or set `css` in `project.json`.
 `themeAttribute` defaults to `data-theme`; set it to `class` for projects that toggle a
 `dark` class. React web projects only (Next, Vite); not React Native yet.
 
+## Offering Sneak Peek on your own
+
+Once a project is past its first frame, `working` may print one question to put in your
+hand-back: whether to add a few lines to your local instructions file in the repo, so that
+in later sessions you offer Sneak Peek when how some UI should look is still open. Ask it
+once, in one sentence, and record the reply (or the `offer` tool):
+
+```sh
+playground offer <project> yes    # writes the lines, keeps the file out of git
+playground offer <project> no     # only stops the question
+```
+
+Either answer is kept in `project.json`, so the question does not come back.
+
 ## Layout
 
 ```
