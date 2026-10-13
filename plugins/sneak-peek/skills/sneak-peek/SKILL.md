@@ -86,10 +86,11 @@ instead of the steps above: one frame of their own screen, before any question.
   resolves from the repo. Use real components and tokens, never re-create them.
 - Components are centered with padding; for pages and flows add
   `export const layout = "fullscreen";`. Flows keep their step state inside the variant.
-- Next.js `Link`, `Image` and `next/navigation` are stubbed. Server components, actions and
-  data fetching do not run: pass fixture data.
-- Helpers stay in the prototype folder. Never edit the project repo from a prototype task;
-  the one file `playground offer` writes there, on the user's yes, is its own.
+- Next.js `Link`, `Image` and `next/navigation` are stubbed. Server components and actions do
+  not run. A client-side fetch to the project's API (`/api/...` by default) reaches the
+  project's own dev server when `working` prints a running backend, reads only; otherwise
+  pass fixture data. See `projects.md`.
+- Helpers stay in the prototype folder. Never edit the project repo from a prototype task.
 
 ## Controls
 

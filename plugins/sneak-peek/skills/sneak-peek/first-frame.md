@@ -17,11 +17,12 @@ within a minute. Ask nothing before it, and offer no list of ideas after it.
    composed component. Read that one file, and a component's file only when its map line is
    not enough.
 4. **Write `index.tsx` with one variant, `Current`,** that renders that screen: the real
-   component, imported from the repo. Data it fetches or receives from the server becomes
-   fixture data passed in. No controls.
+   component, imported from the repo. Data it receives from the server becomes fixture data
+   passed in. When `working` printed a running backend, the screen's own client-side
+   fetches to the API work as they are, reads only. No controls.
 5. **When it cannot run here as it is, mock it. Do not ask.** That is a project that is not a
    React web app (Next, Vite), or a screen that needs what the stage does not run: server
-   data, an Electron or native bridge, WebGPU, a canvas the app draws at runtime. Rebuild what
+   data with no backend running, an Electron or native bridge, WebGPU, a canvas the app draws at runtime. Rebuild what
    the screen shows in React, from the repo's own components where they render, otherwise
    from its markup, stylesheet and tokens, with fixture data standing in for the rest. Name
    the variant `Mock` instead of `Current`.
