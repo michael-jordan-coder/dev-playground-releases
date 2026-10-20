@@ -93,7 +93,9 @@ instead of the steps above: one frame of their own screen, before any question.
 - What the app's root wraps its screens in does not run here: i18n, theme, query client,
   auth, store. Find it in the root layout or `main`, and write one `providers.tsx` in the
   prototype folder that wraps each variant in the same providers, with fixture values. An
-  error that says `must be used within a ...Provider` is that file missing one.
+  error that says `must be used within a ...Provider` is that file missing one. The root's
+  fonts go there too: its `next/font` calls and the classes they put on `<html>` and `<body>`
+  (often a font `variable`), on the wrapper, or the screens fall back to another font.
 - When `working` prints a recipe instead of `index.tsx`, each variant is its own file where
   it says, and a take is a new file rather than an export. `projects.md`, Recipes, has the
   rest; when it says the project has no recipe yet, write that first.

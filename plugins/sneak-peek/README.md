@@ -9,7 +9,7 @@ moment it is saved, with sliders to tune each one by hand. Nothing is written in
 
 - macOS, with the Sneak Peek app installed and opened once:
   [download it](https://github.com/michael-jordan-coder/dev-playground-releases/releases/latest/download/Sneak-Peek.dmg)
-  or see [sneak-peek-bay.vercel.app](https://sneak-peek-bay.vercel.app).
+  or see [trysneakpeek.com](https://trysneakpeek.com).
 - A React web project (Next.js or Vite).
 
 ## Try it
@@ -46,7 +46,7 @@ have. Without the app, the command says where to download it and the hook does n
   (launches, projects added with their stack, prototypes created, renders and errors), with
   project and prototype names replaced and file paths removed, and never your code. You can see
   what is shared and turn it off in the app's Settings, under Account. The
-  [privacy page](https://sneak-peek-bay.vercel.app/privacy) has the details.
+  [privacy page](https://trysneakpeek.com/privacy) has the details.
 
 ## License
 
