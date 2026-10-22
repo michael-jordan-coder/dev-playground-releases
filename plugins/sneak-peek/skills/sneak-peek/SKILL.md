@@ -47,7 +47,9 @@ call waits on a long context. So:
 
    It opens the app on the prototype and prints the file to write, the variants already
    there, the repo, its global stylesheets and the project map. One call covers the whole
-   piece of work. If the project does not exist, see `projects.md` beside this file.
+   piece of work. When the user names no project, run `playground list` first: its
+   `Current project` line is the canvas open in Sneak Peek. If the project does not exist,
+   see `projects.md` beside this file.
 2. **Read, in one parallel batch,** what the first frame needs (see Read little).
 3. **First frame.** Write `index.tsx` with the first variant only, `Current` when the thing
    exists (render the real component). Give it its controls now (see Controls).
@@ -76,6 +78,13 @@ open from another copy, say so in a line and wait.
 
 When the request brought a project in, read `first-frame.md` beside this file and follow it
 instead of the steps above: one frame of their own screen, before any question.
+
+## A blank canvas
+
+A project listed as a `blank canvas` has no repo yet: the user started it from New Project.
+Follow the steps above, but build from scratch in plain React with inline styles, skip
+reading code and the type check, and never `add` its folder. `working` says the same. When
+they want it built from their real components, they press Connect a Project in the app.
 
 ## Writing a prototype
 
