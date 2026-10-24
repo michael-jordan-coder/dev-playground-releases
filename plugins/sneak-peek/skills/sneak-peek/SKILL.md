@@ -74,6 +74,12 @@ the price sits above the features"). No code or commands in chat. Every mark in 
 stands for real work: no `working` or `show` for effect. If a command says Sneak Peek is
 open from another copy, say so in a line and wait.
 
+## The first conversation
+
+When the message asks you to welcome the user to Sneak Peek and bring in their first project,
+write the welcome first, then read `onboarding.md` beside this file and follow it instead of
+the steps above.
+
 ## A project just added
 
 When the request brought a project in, read `first-frame.md` beside this file and follow it
