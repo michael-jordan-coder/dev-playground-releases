@@ -20,7 +20,11 @@ each save, so the user watches the work arrive.
 
 Every command is `${CLAUDE_PLUGIN_ROOT}/bin/playground <command>`, written
 `playground` below; always run the full path. When the `sneak-peek` MCP tools are
-available, use them instead: they are the same actions.
+available, use them for every action instead of the command, and above all for the ones
+that write (`add`, `backend`): they are the same actions, and an agent that runs Bash in a
+sandbox cannot write Sneak Peek's data folder from the command, while the tools can. When
+your tools are deferred, load them first. Use the command only when the tools are not
+available, or when a tool call refuses and says to reconnect them.
 
 ## Speed is the product
 
@@ -74,6 +78,14 @@ the price sits above the features"). No code or commands in chat. Every mark in 
 stands for real work: no `working` or `show` for effect. If a command says Sneak Peek is
 open from another copy, say so in a line and wait.
 
+A link in a prototype that would leave its variant is held in place with a short notice, so
+the prototype needs no click handler for it. A form submit or `location.href` still sends the
+page away, and a frame that is blank, stuck loading or on the wrong page does not reload on a save. Fix what
+sent it away, then `playground reload <project> <prototype> [--variant <Name>]`: it sends the
+frames the app shows back to their variants and says for each where it was and whether it
+rendered. `shot` says where its picture came from, the user's own frame or a fresh render
+in Chrome, and when the user's frame is off its variant it says where the frame is and fails.
+
 ## The first conversation
 
 When the message asks you to welcome the user to Sneak Peek and bring in their first project,
@@ -107,7 +119,9 @@ they want it built from their real components, they press Connect a Project in t
   pass fixture data. See `projects.md`.
 - What the app's root wraps its screens in does not run here: i18n, theme, query client,
   auth, store. Find it in the root layout or `main`, and write one `providers.tsx` in the
-  prototype folder that wraps each variant in the same providers, with fixture values. An
+  prototype folder whose default export, `Providers({ children })`, wraps them in the same
+  providers, with fixture values. The stage renders every variant inside it, so a variant
+  returns the bare screen, such as `<App />`, and never wraps itself. An
   error that says `must be used within a ...Provider` is that file missing one. The root's
   fonts go there too: its `next/font` calls and the classes they put on `<html>` and `<body>`
   (often a font `variable`), on the wrapper, or the screens fall back to another font.

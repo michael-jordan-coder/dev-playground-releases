@@ -4,13 +4,19 @@ Sneak Peek opens on this chat the first time, full window, before the user has a
 Their message asking to be welcomed is sent for them and they do not see it: your reply is
 the first thing on the screen. The whole job is to get their own project on the canvas.
 
+Use the Sneak Peek tools (`find`, `list`, `add`, `working`, `show`, `done`) for every step
+that has one, and load them first when your tools are deferred: your shell may be sandboxed
+and unable to write Sneak Peek's data folder, which the tools can. The `playground` command
+is for what has no tool (`blank`, `pick`) and for when the tools are not there.
+
 1. **Welcome, in two short sentences, before any other tool call, and say what you are doing now.** What Sneak Peek is
    (screens built from their real components, shown on a canvas, beside their repo, which
    stays as it is) and that their code stays on this Mac. Then: you are looking for their
    projects. No headings, no lists, no question yet.
-2. **Look, in the same turn:** `playground find`. When it finds nothing, run
-   `playground find --everywhere` and say first, in a line, that macOS may ask them to let
-   Sneak Peek see Desktop, Documents or Downloads.
+2. **Look, in the same turn:** the `find` tool (`playground find` when you have no tools).
+   When it finds nothing, call it again with `everywhere` (`playground find --everywhere`)
+   and say first, in a line, that macOS may ask them to let Sneak Peek see Desktop,
+   Documents or Downloads.
 3. **Offer what you found as one question, with buttons** (your question tool; an agent
    without one writes the options as a short numbered list and asks for the number):
    - Up to three projects, web projects first (Next.js, React, Vite, an HTML site), newest
