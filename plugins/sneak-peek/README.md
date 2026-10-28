@@ -1,16 +1,18 @@
 # Sneak Peek for Claude Code
 
-Prototype UI from your real repo in a live canvas. Ask Claude for a few takes on a screen or a
-component, and it writes them as prototypes that import your project's own components, tokens
-and styles. The free Sneak Peek Mac app shows every take on phone, tablet and desktop frames the
-moment it is saved, with sliders to tune each one by hand. Nothing is written into your repo.
+Prototype UI on your real app in a live canvas. Sneak Peek copies your project outside the
+repo and runs it there; ask Claude for a few takes on a screen or a component, and it builds
+them in that copy, with your own components, tokens and styles. The free Sneak Peek Mac app
+shows each screen as a live frame, a Code Layer, the moment it is saved. Nothing is written
+into your repo.
 
 ## Requirements
 
 - macOS, with the Sneak Peek app installed and opened once:
   [download it](https://github.com/michael-jordan-coder/dev-playground-releases/releases/latest/download/Sneak-Peek.dmg)
   or see [trysneakpeek.com](https://trysneakpeek.com).
-- A React web project (Next.js or Vite).
+- A web project. Next.js and Vite apps run as they are; for any other stack, Claude writes how
+  to run it the first time.
 
 ## Try it
 

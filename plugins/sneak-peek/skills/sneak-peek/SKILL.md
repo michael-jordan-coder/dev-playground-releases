@@ -14,9 +14,13 @@ allowed-tools:
 the repo, unless the user names that one explicitly. A memory or doc that says otherwise is
 out of date.
 
-Prototypes live outside the project repo and import its real components, tokens and styles.
-The Sneak Peek Mac app shows every variant on phone, tablet and desktop frames and reloads on
-each save, so the user watches the work arrive.
+Sneak Peek runs the user's real application from a working copy of its own, outside their
+repo, and shows its screens on a canvas as **Code Layers**: live frames of the app's routes,
+each at the size the user gives it, reloaded on each save. The user's folder never changes.
+Every project is one: a copy of the user's folder, or, for a blank canvas, a small Vite +
+React starter app. Options are routes and design options of that app, never variants in a
+prototype file: never write `Current`, `Mock`, an `index.tsx` of exported variants, or any
+file in the project folder beside the working copy except `stage.json`.
 
 Every command is `${CLAUDE_PLUGIN_ROOT}/bin/playground <command>`, written
 `playground` below; always run the full path. When the `sneak-peek` MCP tools are
@@ -28,63 +32,105 @@ available, or when a tool call refuses and says to reconnect them.
 
 ## Speed is the product
 
-The user is watching an empty canvas. What costs time is round trips, not code: each tool
-call waits on a long context. So:
+The user is watching the canvas. What costs time is round trips, not code: each tool call
+waits on a long context. So:
 
 - **Batch.** Independent calls go in one message: reads in parallel, and chained commands
   joined with `&&` in one Bash call.
-- **Read little.** `working` prints the project map: its screens, its components with where
-  to import them and what they take, and its tokens. Build from it. Before the first frame,
-  read at most the one file you are changing (a screen, for `Current`), and a component's
-  file only when its map line is not enough. No `ls` tours, no `cat` of folders.
-- **Write once.** Never rewrite a variant you already saved. Each take is its own append.
-- **First frame within a minute** of the request.
+- **Read little.** Before the first change, read the file of the screen you are changing and
+  what it imports that you need, in one parallel batch. No `ls` tours, no `cat` of folders.
+- **Save whole.** The canvas shows each save the moment it lands: never leave a file half
+  written between two edits.
+- **First change on screen within a minute** of the request.
 
 ## How a request goes
 
-1. **Mark the work at once.** One line of plan in chat ("Three takes on the pricing card:
-   Current, Stacked, Compact"), then, before reading anything:
+1. **Mark the work at once.** One line of plan in chat ("Three takes on the pricing card,
+   side by side"), then, before reading anything:
 
    ```sh
-   playground working <project> <prototype> --note "reading your design system"
+   playground working <project> Application --note "reading your pricing page"
    ```
 
-   It opens the app on the prototype and prints the file to write, the variants already
-   there, the repo, its global stylesheets and the project map. One call covers the whole
-   piece of work. When the user names no project, run `playground list` first: its
-   `Current project` line is the canvas open in Sneak Peek. If the project does not exist,
-   see `projects.md` beside this file.
-2. **Read, in one parallel batch,** what the first frame needs (see Read little).
-3. **First frame.** Write `index.tsx` with the first variant only, `Current` when the thing
-   exists (render the real component). Give it its controls now (see Controls).
-4. **Each next take: one Edit that only appends** the new `export function` at the end of
-   the file, with any import it needs that is not imported yet (imports may sit anywhere at
-   module top level). Every save must be whole: the app shows it the moment it lands.
-5. **Check once, at the end,** in one message of parallel calls: a
-   `playground shot <project> <prototype> --variant <Name>` per new variant, plus
-   `<repo>/node_modules/.bin/tsc -p <projects>/<project>` when the repo is TypeScript (the
-   project's folder is the one above the prototype file). Skip it for a JavaScript repo. `shot` prints the PNG path, and the errors if the variant
-   threw. Read the PNGs in one parallel batch. Fix only what is broken or clearly off, with
-   a targeted Edit.
-6. **Hand back:** `playground done` and `playground show <project> <prototype> --variant
-   <Name>` in one message, then in chat one line per variant (its name and the idea it
-   tests), which one you would start from and why, and that they can double-click a frame
-   to tune its controls, keep one, or ask for more. When `working` printed a question to
-   ask once, it is the last line, in one sentence; on their reply, record it with
-   `playground offer` as that line says.
+   It opens the app on the project, starts the application when it is not running, and
+   prints the working copy to edit, how the application runs, whether it runs now (with its
+   last output when it is starting or failed) and its Code Layers. When the user names no
+   project, run `playground list` first: its `Current project` line is the canvas open in
+   Sneak Peek, or the project copied from the folder you run in. When the project is not
+   there, `add` it (`projects.md`, Bringing a project in).
+2. **When `working` says it runs nothing yet,** write its run recipe first (`projects.md`,
+   Running an application), then go on. When it says the runtime failed, read the output it
+   printed and fix the cause in the copy or the recipe: a missing package, a missing
+   environment value, a port flag. Never replace the app with a screen of your own.
+3. **Read, in one parallel batch,** what the change needs, from the working copy.
+4. **Change the application's own files in the working copy.** Every Code Layer showing that
+   route reloads on the save.
+5. **Options side by side.** Takes on a screen or component are prototype routes of the app,
+   each shown as a Code Layer of its own (Prototype routes, below): the user compares them on
+   the canvas, all live. A direction that changes shared code across the app is a design
+   option instead: `workspace <project> new-option {"label":"Compact nav"}` returns its own
+   copy and project name; edit that copy, and show it with a layer whose `runtimeProject` is
+   the option. Each option is a whole copy with its own install and server, so make one only
+   when the take cannot live as a route.
+6. **Check once, at the end,** in one message of parallel calls: a
+   `playground shot <project> Application --layer <id>` per layer you changed. Read the PNGs
+   in one parallel batch. Fix only what is broken or clearly off.
+7. **Hand back:** `playground done` and `playground show <project> Application --layer <id>`
+   in one message, then in chat one line per layer (its name and the idea it tests), which
+   one you would start from and why. When `working` printed a question to ask once, it is
+   the last line, in one sentence; on their reply, record it with `playground offer` as that
+   line says.
 
 While you work, chat only what changes on screen, a short line per take ("Stacked is up:
 the price sits above the features"). No code or commands in chat. Every mark in the app
 stands for real work: no `working` or `show` for effect. If a command says Sneak Peek is
 open from another copy, say so in a line and wait.
 
-A link in a prototype that would leave its variant is held in place with a short notice, so
-the prototype needs no click handler for it. A form submit or `location.href` still sends the
-page away, and a frame that is blank, stuck loading or on the wrong page does not reload on a save. Fix what
-sent it away, then `playground reload <project> <prototype> [--variant <Name>]`: it sends the
-frames the app shows back to their variants and says for each where it was and whether it
-rendered. `shot` says where its picture came from, the user's own frame or a fresh render
-in Chrome, and when the user's frame is off its variant it says where the frame is and fails.
+### Prototype routes and fixture data
+
+A screen that needs a login, data from a server, or a backend that is not running here, and
+every take on a screen, is a **prototype route**: a page of the app's own router, in the
+working copy, that renders the real screen or component with fixture data and the providers
+the app's root wraps it in (theme, i18n, query client, store, a signed-in user). Put them
+under one path, `/sneak-peek/<screen>/<take>`, in the router's own way:
+
+- Next.js app router: `app/sneak-peek/<screen>/<take>/page.tsx` (a route group or a
+  `(sneak-peek)` folder when the root layout needs a session it cannot have).
+- Vite without a router: a page `sneak-peek/<screen>/<take>/index.html` with a module script
+  that mounts the screen; Vite serves it as it is.
+- React Router, TanStack Router and the like: a route added where the app declares them.
+- Any other stack: a page or route as that framework makes one.
+
+Fixture data lives beside the route (`fixtures.ts`), typed by the app's own types, realistic
+in length and count. Never stub the real component: render it, and pass it data. When the
+app's auth guard redirects, the prototype route sits outside the guarded group, or wraps the
+screen in the auth provider with a fixture user. Then show it as a layer of its own:
+
+```sh
+playground workspace <project> edit-layer '{"action":"upsert","layer":{"id":"pricing-stacked","name":"Pricing · Stacked","route":"/sneak-peek/pricing/stacked"}}'
+```
+
+A new layer without `x`, `y`, `width` and `height` takes a desktop size to the right of the
+others; give a width of 390 and height of 844 for a phone. When the user keeps one take,
+port it into the real screen in the main copy, then remove the other routes and their
+layers (`edit-layer` `{"action":"remove","id":"..."}`).
+
+### Workspace actions
+
+Use the `workspace` MCP tool or `playground workspace <project> <action> [JSON]` for
+`files`, `file` (`{"path":"src/file.tsx"}`), `changes`, `history`, `checkpoint`, `restore`
+(`{"id":"checkpoint-id"}`), `layers`, `edit-layer`, `new-option`, `apply-option`, `delete-option`
+(`{"option":"option-name"}`), and `runtime`
+(`{"action":"run"}`, `stop`, or `restart`). The selected report names the Code Layer,
+route and working root; edits belong to that root. Ordinary duplicated frames share code.
+History excludes known secrets, generated files, symlinks and oversized source; it is not
+a backup of credentials. Restore, applying an option and deleting one need an explicit user request
+after reviewing changes; restore and apply retain a recovery checkpoint. Applying never writes the original repo.
+
+A page that navigates (a link, a form, `location.href`) moves its layer's frame with it; the
+user's navigation is normal. When a frame is blank, stuck loading or on the wrong page,
+`playground reload <project> Application` sends the frames the app shows back to their
+routes and says for each where it was and whether it rendered.
 
 ## The first conversation
 
@@ -95,65 +141,22 @@ the steps above.
 ## A project just added
 
 When the request brought a project in, read `first-frame.md` beside this file and follow it
-instead of the steps above: one frame of their own screen, before any question.
+instead of the steps above: their own app running on the canvas, before any question.
 
 ## A blank canvas
 
-A project listed as a `blank canvas` has no repo yet: the user started it from New Project.
-Follow the steps above, but build from scratch in plain React with inline styles, skip
-reading code and the type check, and never `add` its folder. `working` says the same. When
-they want it built from their real components, they press Connect a Project in the app.
+A project listed as a `blank canvas` runs Sneak Peek's starter app: Vite and React, with
+`src/App.jsx` as its one screen. Follow the steps above and build the user's idea in it from
+scratch, in plain React and CSS, adding packages with npm when they help. Never `add` its
+folder. When they want their own app instead, they press Connect a Project in the app, or
+you run `playground add <blank-project> <folder>`, which replaces the starter with a copy.
 
-## Writing a prototype
+## Legacy prototype projects
 
-- Folder name: kebab-case, named for the product idea (`contact-cta`). Variants:
-  `export function Name()`, capitalized, no props, named for the idea they test. File order
-  is app order.
-- Import from the repo with its own aliases and packages; everything, React included,
-  resolves from the repo. Use real components and tokens, never re-create them.
-- Components are centered with padding; for pages and flows add
-  `export const layout = "fullscreen";`. Flows keep their step state inside the variant.
-- Next.js `Link`, `Image` and `next/navigation` are stubbed. Server components and actions do
-  not run. A client-side fetch to the project's API (`/api/...` by default) reaches the
-  project's own dev server when `working` prints a running backend, reads only; otherwise
-  pass fixture data. See `projects.md`.
-- What the app's root wraps its screens in does not run here: i18n, theme, query client,
-  auth, store. Find it in the root layout or `main`, and write one `providers.tsx` in the
-  prototype folder whose default export, `Providers({ children })`, wraps them in the same
-  providers, with fixture values. The stage renders every variant inside it, so a variant
-  returns the bare screen, such as `<App />`, and never wraps itself. An
-  error that says `must be used within a ...Provider` is that file missing one. The root's
-  fonts go there too: its `next/font` calls and the classes they put on `<html>` and `<body>`
-  (often a font `variable`), on the wrapper, or the screens fall back to another font.
-- When `working` prints a recipe instead of `index.tsx`, each variant is its own file where
-  it says, and a take is a new file rather than an export. `projects.md`, Recipes, has the
-  rest; when it says the project has no recipe yet, write that first.
-- Helpers stay in the prototype folder. Never edit the project repo from a prototype task.
-
-## Controls
-
-Give each new variant 3 to 5 controls for what it really tests (spacing, radius, size, a
-tone, the copy, a state to toggle), with presets and options from the map's tokens and
-props; do not go reading more files for them:
-
-```tsx
-import { useControls } from "dev-playground";
-
-export function Card() {
-  const c = useControls({
-    radius: { value: 16, presets: [0, 8, 12, 16, 24], for: "card" },
-    tone: { value: "surface", options: ["surface", "surface-secondary"], for: "card" },
-    showAvatar: { value: true, for: "avatar" },
-    title: { value: "Need a designer who ships?", for: "title" },
-  });
-  // <div data-control="card">, <Avatar data-control="avatar" />, <h2 data-control="title">
-}
-```
-
-Each control has a `for`, matched by `data-control` on its element. Existing prototypes get
-no controls unless asked. For the full rules (presets, colors, which widget each value
-becomes) and applying what the user tuned, read `controls.md` beside this file, only when
-you need them.
+`list` names projects registered before working copies as `legacy prototype project`. Do
+not write variants in them. When the user wants to work on one, bring its repo in with
+`playground reimport <project>`: a new working copy, while the legacy project stays as it
+is. Then work in the new one.
 
 ## Other requests
 
@@ -161,5 +164,5 @@ Read the file beside this one only when the request calls for it:
 
 - `selection-and-notes.md`: the user says "this", "the selected one", or refers to notes
   they left in the app.
-- `projects.md`: registering a project, its stylesheet, the offer `working` may ask you to
-  put, the folder layout, snapshots before reworking, opening the app.
+- `projects.md`: bringing a project in, running an application Sneak Peek cannot run by
+  itself, the offer `working` may ask you to put, the folder layout, opening the app.

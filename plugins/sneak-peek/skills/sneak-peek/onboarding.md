@@ -10,8 +10,8 @@ and unable to write Sneak Peek's data folder, which the tools can. The `playgrou
 is for what has no tool (`blank`, `pick`) and for when the tools are not there.
 
 1. **Welcome, in two short sentences, before any other tool call, and say what you are doing now.** What Sneak Peek is
-   (screens built from their real components, shown on a canvas, beside their repo, which
-   stays as it is) and that their code stays on this Mac. Then: you are looking for their
+   (their real app, run from a copy of their project, with its screens live on a canvas;
+   their own folder stays as it is) and that their code stays on this Mac. Then: you are looking for their
    projects. No headings, no lists, no question yet.
 2. **Look, in the same turn:** the `find` tool (`playground find` when you have no tools).
    When it finds nothing, call it again with `everywhere` (`playground find --everywhere`)
@@ -27,16 +27,16 @@ is for what has no tool (`blank`, `pick`) and for when the tools are not there.
    - No option for choosing a folder: Sneak Peek puts a Choose a folder button under your
      question, which opens the Mac's own panel and answers with the folder's path.
 4. **On their answer:**
-   - A project: register it (`projects.md`, Registering a project). Sneak Peek leaves this
-     chat for the project's canvas as soon as it is listed, and this conversation goes on
-     beside the canvas. Then follow `first-frame.md` straight away: one frame of their own
-     screen, with no question before it.
-   - A folder path: the folder they chose. Register that one and go on as for a project.
+   - A project: bring it in with `add` (`projects.md`, Bringing a project in). Sneak Peek
+     leaves this chat for the project's canvas as soon as it is listed, and this conversation
+     goes on beside the canvas. Then follow `first-frame.md` straight away: their own app
+     running on the canvas, with no question before it.
+   - A folder path: the folder they chose. Bring that one in and go on as for a project.
    - When they ask in words to choose a folder, `playground pick` opens the Mac's folder
      dialog and prints the folder. When it fails or they close it, ask them to press Choose a
      folder under your question, or to paste the folder's path.
-   - A blank canvas: `playground blank`, then one line saying the canvas is theirs and what
-     to ask for. Sneak Peek opens on it.
+   - A blank canvas: `playground blank`, then one line saying the canvas is theirs, a small
+     React app you build in, and what to ask for. Sneak Peek opens on it and runs it.
    - Something they typed instead: a path is a folder they chose; anything else, answer it
      and offer the choice again.
 
