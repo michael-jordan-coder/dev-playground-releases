@@ -8,7 +8,7 @@
       "name": "sneak-peek",
       "source": "./plugins/sneak-peek",
       "description": "Prototype UI on your real app in a live canvas: Sneak Peek runs a copy of your project outside the repo, Claude edits that copy, and each screen shows as a live frame the moment it is saved. Needs the free Sneak Peek Mac app.",
-      "version": "0.14.0"
+      "version": "0.15.0"
     }
   ]
 }

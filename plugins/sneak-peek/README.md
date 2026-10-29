@@ -24,11 +24,10 @@ Open Claude Code in your project and ask, for example:
 
 ## What the plugin contains
 
-- A skill, `sneak-peek`: how Claude builds prototypes quickly, gives them controls, checks
-  them and hands them back.
-- An MCP server, `sneak-peek`, with the playground's actions: `find`, `working`, `show`, `done`,
-  `shot`, `reload`, `open`, `selected`, `notes`, `note_done`, `controls`, `list`, `snapshot`, `add`,
-  `backend` and `offer`.
+- A skill, `sneak-peek`: build faithful live prototypes in managed working copies and
+  involve the user while they take shape.
+- An MCP server with five tools: `get_context`, `prepare_project`, `present`, `inspect`
+  and `create_alternative`.
 - A `UserPromptSubmit` hook that hands Claude the notes you pin on elements in the app, with
   your next message.
 
