@@ -35,7 +35,9 @@ workspace IDs identify the main managed copy or an option, and frame IDs identif
   `files`, `bytes`, `screenshot`, `route` and `framework`. No server, upload or account. A
   failure's message has the reason and a ready prompt (reason, build output, goal): fix the
   working copy, never the source, and call again. Reasons include `needs_server`,
-  `missing_package`, `build_failed`, `render_errors`, `unsupported_stack` and `not_installed`.
+  `missing_package`, `build_failed`, `render_errors`, `unsupported_stack`, `not_installed` and
+  `missing_tool` (the package manager or node is not on this Mac: tell the user to install it;
+  there is nothing to fix in the copy).
   The CLI form is `share <project> --local [--layer ID]`.
 - `share({projectId?, layerId?, remove?})`: the same build and check as `share_local`, then the
   files go to Sneak Peek's share server and the frame joins the project's one public link:
