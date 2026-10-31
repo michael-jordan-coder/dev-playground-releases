@@ -29,6 +29,25 @@ workspace IDs identify the main managed copy or an option, and frame IDs identif
   Reuse the same key when retrying; code already edited in that alternative is preserved.
   Edit the returned workspace path. Use multiple routes in a shared copy when isolation
   is unnecessary. This tool never applies an option to original source.
+- `share_local({projectId?, layerId?})`: builds the managed working copy to static files in a
+  throwaway clone (Next.js with `output: "export"` set in the clone, or `vite build`), serves
+  them and opens the selected or given Code Layer's route in Chrome, and returns `folder`,
+  `files`, `bytes`, `screenshot`, `route` and `framework`. No server, upload or account. A
+  failure's message has the reason and a ready prompt (reason, build output, goal): fix the
+  working copy, never the source, and call again. Reasons include `needs_server`,
+  `missing_package`, `build_failed`, `render_errors`, `unsupported_stack` and `not_installed`.
+  The CLI form is `share <project> --local [--layer ID]`.
+- `share({projectId?, layerId?, remove?})`: the same build and check as `share_local`, then the
+  files go to Sneak Peek's share server and the frame joins the project's one public link:
+  `frame`, `url`, `id`, `expiresAt` (30 days after the link's last change), `frames` (the names
+  the link shows), `renewed` (the old link had expired or was stopped, so this is a new address),
+  `files`, `bytes`, `route`, `framework`. Sharing a frame again updates it in the link. With
+  `remove: true` it takes the frame out and answers `frame`, `url` and `frames`; the last frame
+  out stops the link (`url` is null). Needs the app open with the user signed in. Upload
+  failures are `not_signed_in`, `too_large` (25 MB, 500 files, 4 MB per file),
+  `server_unreachable` and `upload_failed`; they carry no fix message, since the copy is not at
+  fault. The user stops the whole link from the app's Share menu. The CLI form is
+  `share <project> [--layer ID] [--remove]`.
 
 Unsupported legacy projects are reported explicitly, never converted automatically.
 If no project is open, choose an identified project or prepare one from the request;

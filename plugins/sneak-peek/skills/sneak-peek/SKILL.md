@@ -134,7 +134,7 @@ Explain any necessary adaptation that changes the result.
 
 ## Tools and working paths
 
-When the `sneak-peek` MCP tools are available, use the five tools described in
+When the `sneak-peek` MCP tools are available, use the seven tools described in
 [tools.md](tools.md). Start with `get_context` to obtain the project, selection, notes,
 source path, working path and runtime state without asking the user for them.
 Use `prepare_project` only when preparation or startup is needed. Edit the returned
@@ -146,6 +146,17 @@ Use `inspect` to check the canvas. A browser fallback is a separate render, and 
 do not verify interactions. Exercise behavior with available interaction tools; if unavailable,
 state that limitation instead of claiming the flow was tested.
 
+When the user wants to show a prototype to someone, or asks for a link, call `share`: it builds
+the frame's working copy to static files (Next.js with static export, or Vite), opens them in
+Chrome and checks they render without errors, then uploads them and adds the frame to the
+project's one public link, which shows every frame added and keeps its address. Sharing a frame
+again updates it; `remove: true` takes it out. The link opens for anyone until 30 days after its
+last change. It needs the app open with the user signed in; say plainly that the link is public,
+and give the user the new address when the result says `renewed`. `share_local` stops at the checked local folder and uploads nothing. If either fails, the error says why and carries a message for you: fix the working copy as it says
+(never the original), replacing live data and API calls with representative fixtures, tell the user
+what stands in for what, and call again. If it needs live data that cannot be replaced or a private
+package, tell the user it cannot be shared and stop. Do not try more than twice.
+
 If MCP is unavailable, reconnect it. The existing CLI remains available for legacy and
 administrative operations as `${CLAUDE_PLUGIN_ROOT}/bin/playground <command>`;
-it does not provide the five-tool contract. Do not replace missing context with guesses.
+it does not provide the seven-tool contract. `playground share <project>` is the CLI form of `share`, and `--local` of `share_local`. Do not replace missing context with guesses.
