@@ -157,6 +157,10 @@ and give the user the new address when the result says `renewed`. `share_local` 
 what stands in for what, and call again. If it needs live data that cannot be replaced or a private
 package, tell the user it cannot be shared and stop. Do not try more than twice.
 
+A failure with the code `pro_required` is the user's plan, not something to fix: share links,
+and more than two projects, are part of Sneak Peek Pro. Tell the user what the message says,
+including where to upgrade, and do not retry, work around the limit or remove a project yourself.
+
 If MCP is unavailable, reconnect it. The existing CLI remains available for legacy and
 administrative operations as `${CLAUDE_PLUGIN_ROOT}/bin/playground <command>`;
 it does not provide the seven-tool contract. `playground share <project>` is the CLI form of `share`, and `--local` of `share_local`. Do not replace missing context with guesses.
